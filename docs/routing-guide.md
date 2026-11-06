@@ -36,7 +36,7 @@ These are possible follow-ups from existing README TODOs, not implemented behavi
 
 1. **Support multi-line passenger journeys.** Implement the README TODO “passenger generation for multi-line trips” by using a route result to select journeys whose path includes transfers. The router already has transfer edges and returns a transfer count, but `Passenger` currently stores only origin and destination IDs.
 2. **Connect route choice to boarding.** Address “passenger boarding logic” in the README by defining how a passenger follows the route's line sequence when boarding and changing lines. The current `Passenger` model has no planned route or boarding state, and the router only returns a path; it does not board passengers.
-3. **Align the network TODO with the existing router.** The README says “make lines a graph to implement Dijkstra”. Before building another graph, reconcile that TODO with `src/routing/router.py`, which already builds a Dijkstra graph from GTFS. A follow-up could clarify whether the desired graph should instead use the simulation `Line` and `Station` models and then implement that integration.
+3. **Align the network TODO with the existing router.** The README says “make lines a graph to implement Dijkstra”. Reconcile that TODO with `src/routing/router.py`, which already builds a Dijkstra graph from GTFS, and clarify whether the intended graph should use the simulation `Line` and `Station` models.
 
 ## Sources
 
