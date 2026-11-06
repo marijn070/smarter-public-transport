@@ -18,9 +18,9 @@ The visualizer runs at the configured FPS. Press Space to pause or resume, R to 
 
 `Config.from_yaml` in `src/core/config.py` builds validated simulation and visualization settings. `Simulator` (`src/simulation/simulator.py`) asks `GTFSLoader` for each configured route. It creates the configured number of trains on each loaded line, placing them at evenly spaced station indices, then spawns the configured initial passenger count. Each passenger is assigned a random loaded line and two distinct stations on that line; the passenger record starts at the chosen origin.
 
-While the visualizer is unpaused, it calls `Simulator.step()` `int(simulation_speed)` times per frame. Each step updates every train by `time_step_seconds`, then advances the simulation clock by that amount. A traveling train advances by its speed converted from km/h to km/s. When it reaches the next station, it stops there. It then counts down the fixed dwell time and departs; at either end of the ordered line it reverses direction. The visualizer draws the lines, stations, waiting passenger markers, trains, and status UI.
+While the visualizer is unpaused, it calls `Simulator.step()` `int(simulation_speed)` times per frame. Each step updates every train by `time_step_seconds`, then advances the simulation clock by that amount. A traveling train advances by its speed converted from km/h to km/s. When it reaches the next station, the next update starts the fixed dwell timer; the train then counts it down and departs. At either end of the ordered line it reverses direction. The visualizer draws the lines, stations, waiting passenger markers, trains, and status UI. Station labels are always drawn using the first four characters of each station's `name`; the `show_station_names` setting is not consulted.
 
-`simulation_speed` therefore controls the integer number of steps per rendered frame, with fractional values truncated. `reset()` sets the clock to zero and respawns trains; it does not recreate the initial passenger list.
+`simulation_speed` therefore controls the integer number of steps per rendered frame, with fractional values truncated. `reset()` sets the clock to zero and respawns trains; it does not recreate the initial passenger list, so passengers stay at their original stations while trains return to their configured starting positions.
 
 ## Core objects
 
