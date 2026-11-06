@@ -24,7 +24,7 @@ A `RoutingResult` contains:
 - `total_cost_seconds`: sum of the selected travel and transfer edge weights.
 - `transfers`: count of line changes along the reconstructed node path.
 
-The query returns `None` if there is no usable graph node for either endpoint or no path connects them. If origin and destination IDs are equal, it returns a zero-cost result with one segment; the segment's line is an arbitrary member of the station's line set (or an empty string when none is known). `get_lines_at_station` returns sorted served line names, and `get_all_station_ids` returns the station IDs represented in the router's station-to-lines index.
+The query returns `None` if there is no usable graph node for either endpoint or no path connects them. If origin and destination IDs are equal, it returns a zero-cost result with one segment even if that station is not in the graph. The segment uses the station name if known, otherwise the ID; its line is whichever member of the station's line set is yielded first, or an empty string when no line is known. `get_lines_at_station` returns sorted served line names, and `get_all_station_ids` returns the station IDs represented in the router's station-to-lines index.
 
 ## Relationship to core models
 
